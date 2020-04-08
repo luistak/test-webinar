@@ -1,0 +1,13 @@
+{
+  "name": "@lesson/fundamentals",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "node src/tests/intro.js",
+    "start:global": "node --require ./src/globals.js ./src/tests/intro.js"
+  },
+  "devDependencies": {
+    "jest": "^25.2.7"
+  }
+}
