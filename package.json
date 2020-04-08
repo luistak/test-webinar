@@ -9,5 +9,8 @@
   "private": true,
   "devDependencies": {
     "lerna": "^3.20.2"
+  },
+  "scripts": {
+    "postinstall": "lerna bootstrap"
   }
 }
