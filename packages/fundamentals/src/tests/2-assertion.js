@@ -1,4 +1,4 @@
-const { sum, minus } = require('../math');
+const { sum, subtract } = require('../math');
 
 /**
  * This function is like an assertion library
@@ -17,9 +17,9 @@ let result, expected;
 result = sum(10, 5);
 expected = 15;
 
-expect(result).toBe(expected)
+expect(result).toBe(expected);
 
-result = minus(10, 5);
+result = subtract(10, 5);
 expected = 5;
 
-expect(result).toBe(expected)
+expect(result).toBe(expected);
