@@ -1,17 +1,17 @@
-const { sum, subtract } = require("../math");
+const { sum, subtract } = require('../math')
 
-let result, expected;
+let result, expected
 
-test("should sum numbers", () => {
-  result = sum(10, 5);
-  expected = 15;
+test('should sum numbers', () => {
+  result = sum(10, 5)
+  expected = 15
 
-  expect(result).toBe(expected);
-});
+  expect(result).toBe(expected)
+})
 
-test("should subtract numbers", () => {
-  result = subtract(10, 5);
-  expected = 5;
+test('should subtract numbers', () => {
+  result = subtract(10, 5)
+  expected = 5
 
-  expect(result).toBe(expected);
-});
+  expect(result).toBe(expected)
+})
