@@ -4,7 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "test": "node ./src/tests/simple.js",
+    "test": "node ./src/tests/1-simple.js",
     "test:global": "node -r ./src/globals.js"
   },
   "devDependencies": {
