@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from '../App';
+import App from '..';
 
 test('renders learn react link with logo', () => {
   const div  = document.createElement('div');

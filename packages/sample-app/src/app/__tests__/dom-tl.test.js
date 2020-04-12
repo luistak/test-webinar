@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { getQueriesForElement } from '@testing-library/dom';
 
 import LogoImage from  '../logo.svg';
-import App from '../App';
+import App from '..';
 
 test('renders learn react link with logo', () => {
   const div  = document.createElement('div');

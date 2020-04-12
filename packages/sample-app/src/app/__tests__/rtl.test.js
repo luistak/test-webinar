@@ -2,7 +2,7 @@ import React from 'react';
 import { render } from '@testing-library/react';
 
 import LogoImage from  '../logo.svg';
-import App from '../App';
+import App from '..';
 
 test('renders learn react link with logo', () => {
   const {

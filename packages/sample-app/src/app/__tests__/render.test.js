@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { getQueriesForElement } from '@testing-library/dom';
 
 import LogoImage from  '../logo.svg';
-import App from '../App';
+import App from '..';
 
 const render = (Ui) => {
   const container  = document.createElement('div');
