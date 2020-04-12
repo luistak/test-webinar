@@ -1,7 +1,7 @@
 const { sum, subtract } = require('../math');
 
 /**
- * An automated test in JavaScript is code that throws an error when things are unexpected. Let's do that. Let's get our result from the sum of three and seven.
+ * An automated test in JavaScript is code that throws an error when things are unexpected.
  */
 let result, expected;
 
