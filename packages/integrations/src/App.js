@@ -16,6 +16,19 @@ const EcommerceContext = React.createContext({
   }
 });
 
+function FastCart() {
+  const { cart: { items = {} } } = useContext(EcommerceContext);
+
+  const quantity = Object.values(items).reduce((agg, val) => agg + val, 0);
+
+  return (
+    <div>
+      <div><Link to="/checkout">Fast Cart</Link></div>
+      <div>Items Quantity: {quantity}</div>
+    </div>
+  )
+}
+
 function Home() {
   const { items } = useContext(EcommerceContext);
 
@@ -23,10 +36,15 @@ function Home() {
     <div className="home">
       <h1 style={{ marginLeft: '1rem' }}>Items</h1>
       {
-        items.map(item => (
-          <div key={item.id} style={{ border: '1px solid', padding: '1rem', margin: '1rem 0' }}>
-            <Link to={`/item/${item.id}`}>
-              {item.name}
+        items.map(({ id, name }) => (
+          <div
+            key={id}
+            style={{
+              border: '1px solid', padding: '1rem', margin: '1rem 0'
+            }}
+          >
+            <Link to={`/item/${id}`}>
+              {name}
             </Link>
           </div>
         ))
@@ -59,7 +77,7 @@ const Details = ({ onAddToCart, match } ) => {
     }}>
       <h1>Item: {name}</h1>
       <p>Price: {price}</p>
-      <a href={about}>Learn more</a>
+      <a href={about} target="_blank">Learn more</a>
       <img
         src={image}
         style={{
@@ -81,7 +99,7 @@ const Details = ({ onAddToCart, match } ) => {
   );
 };
 
-function Cart() {
+function Checkout({ onCartItemChange }) {
   const {
     items = [],
     cart: {
@@ -117,6 +135,7 @@ function Cart() {
               <span>Price: {price}</span>
               <span>Total: {total}</span>
               <span>Quantity: {quantity}</span>
+              <button type="button" onClick={() => onCartItemChange(id, -quantity)}>Remove</button>
             </div>
           );
         })
@@ -142,14 +161,20 @@ function App() {
     fetchData();
   }, []);
 
-  const handleAddToCart = (itemId, quantity) => {
+  const handleCartItemChange = (itemId, quantity) => {
     const cartItemQuantity = cartItems[itemId] || 0;
-    const newQuantity = Number(cartItemQuantity + quantity);
+    const newQuantity = Number(cartItemQuantity + Number(quantity));
 
-    setCartItems({
+    const newCartItems = {
       ...cartItems,
       ...(newQuantity > 0 && { [itemId]: newQuantity })
-    })
+    };
+
+    if (newQuantity <= 0) {
+      delete newCartItems[itemId];
+    }
+
+    setCartItems(newCartItems);
   }
 
   if (!items.length) return <div>Loading...</div>;
@@ -169,14 +194,17 @@ function App() {
             justifyContent: 'space-between',
           }}>
             <Link to="/">Pocket eCommerce</Link>
-            <Link to="/cart">Cart</Link>
+            <FastCart />
           </header>
           <Switch>
             <Route
               path="/item/:itemId"
-              component={(routeProps) => <Details onAddToCart={handleAddToCart}{...routeProps}/>}
+              component={(routeProps) => <Details onAddToCart={handleCartItemChange}{...routeProps}/>}
             />
-            <Route path="/cart" component={Cart} />
+            <Route
+              path="/checkout"
+              component={(routeProps) => <Checkout onCartItemChange={handleCartItemChange}{...routeProps}/>}
+            />
             <Route path="/" component={Home} />
           </Switch>
         </Router>
