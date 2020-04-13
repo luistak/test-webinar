@@ -51,14 +51,14 @@ export default function userReducer(state = initialState, action) {
   }
 }
 
-export function fetchAuthenticate(dispatch, user, password) {
+export async function fetchAuthenticate(dispatch, user, password) {
   dispatch(fetchAuth());
-  authenticate(user, password)
-    .then((resp) => {
-      dispatch(fetchAuthFulfill(resp.name));
-    })
-    .catch((e) => {
-      console.error(e);
-      dispatch(fetchAuthReject('Login/Senha inválidos'));
-    });
+
+  try {
+    const resp = await authenticate(user, password);
+    dispatch(fetchAuthFulfill(resp.name));
+  } catch (e) {
+    console.error(e);
+    dispatch(fetchAuthReject('Login/Senha inválidos'));
+  }
 }
