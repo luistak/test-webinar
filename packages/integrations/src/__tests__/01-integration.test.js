@@ -1,34 +1,43 @@
 import React from 'react';
-import { render, waitFor, waitForElement } from '@testing-library/react';
+import { render, wait, fireEvent } from '@testing-library/react';
 
 import {
-  checkOut as mockedCheckOut,
-  fetchItems as mockedFetchItems
+  checkOut as mockedCheckOut
 } from '../api'
 
-import { mockedRawItems } from './mocks';
+import { mockedItems } from '../mocks';
 import App from '../App';
-import { act } from 'react-dom/test-utils';
 
 jest.mock('../api')
 
-beforeAll(() => {
-  mockedFetchItems.mockResolvedValueOnce(mockedRawItems)
-  mockedCheckOut.mockResolvedValueOnce({ success: true })
-})
+test('order check out ', async () => {
+  const item = mockedItems[0];
+  window.alert = jest.fn();
+  mockedCheckOut.mockResolvedValueOnce({ success: true });
 
+  const { debug, getByText, getByLabelText } = render(<App />);
+  expect(getByText(/pocket ecommerce/i)).toBeInTheDocument();
 
-test('renders learn react link', async () => {
-  const { debug, getByText, findByText } = render(<App />);
+  const itemLink = getByText(item.name);
+  fireEvent.click(itemLink);
 
-  debug()
+  const itemInput = getByLabelText(/quantity/i);
+  fireEvent.change(itemInput, { target: { value: 12 }});
 
-  expect(getByText('Loading...')).toBeInTheDocument();
-  expect(mockedFetchItems).toHaveBeenCalled();
+  const addToCartButton = getByText(/add to cart/i);
+  fireEvent.click(addToCartButton);
 
-  debug()
-  const bla = await waitForElement(async () => await findByText('Pocket eCommerce'))
-  // expect(await f).toBeInTheDocument();;
-  console.log({ bla });
-  debug()
+  const homeLink = getByText(/pocket ecommerce/i);
+  fireEvent.click(homeLink);
+
+  const cartLink = getByText(/cart/i);
+  fireEvent.click(cartLink);
+
+  const checkOutButton = getByText(/check out/i);
+  fireEvent.click(checkOutButton);
+
+  await wait(() => {
+    expect(mockedCheckOut).toHaveBeenCalled()
+    expect(window.alert).toHaveBeenCalled()
+  })
 });
