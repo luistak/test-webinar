@@ -15,7 +15,7 @@ test('order check out ', async () => {
   window.alert = jest.fn();
   mockedCheckOut.mockResolvedValueOnce({ success: true });
 
-  const { debug, getByText, getByLabelText } = render(<App />);
+  const { getByText, getByLabelText } = render(<App />);
   expect(getByText(/pocket ecommerce/i)).toBeInTheDocument();
 
   const itemLink = getByText(item.name);
