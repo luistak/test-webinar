@@ -1,0 +1,25 @@
+{
+  "name": "adhoc",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/luistak/test-workshop",
+  "license": "MIT",
+  "scripts": {
+    "test": "jest --watch",
+    "test:ci": "CI=true jest"
+  },
+  "dependencies": {
+    "@babel/core": "^7.9.0",
+    "@babel/preset-env": "^7.9.5",
+    "@babel/preset-react": "^7.9.4",
+    "@testing-library/jest-dom": "^5.5.0",
+    "@testing-library/react": "^10.0.2",
+    "babel-jest": "^25.3.0",
+    "babel-loader": "^8.1.0",
+    "jest": "^25.3.0",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-redux": "^7.2.0",
+    "redux": "^4.0.5"
+  }
+}
