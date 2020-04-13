@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import {
   BrowserRouter as Router,
   Switch,
@@ -7,7 +7,8 @@ import {
 } from 'react-router-dom';
 import './App.css';
 
-import { fetchItems, checkOut } from './api';
+import { checkOut } from './api';
+import { mockedItems } from './mocks';
 
 const EcommerceContext = React.createContext({
   items: [],
@@ -16,14 +17,14 @@ const EcommerceContext = React.createContext({
   }
 });
 
-function FastCart() {
+function Cart() {
   const { cart: { items = {} } } = useContext(EcommerceContext);
 
   const quantity = Object.values(items).reduce((agg, val) => agg + val, 0);
 
   return (
     <div>
-      <div><Link to="/checkout">Fast Cart</Link></div>
+      <div><Link to="/checkout">Cart</Link></div>
       <div>Items Quantity: {quantity}</div>
     </div>
   )
@@ -115,12 +116,13 @@ function Checkout({ onCartItemChange, onClearCart, history }) {
 
       try {
         await checkOut();
+        setLoading(false);
+
         onClearCart();
         history.push('/');
         alert('Order created successfully!')
       } catch (error) {
         console.error(error);
-      } finally {
         setLoading(false)
       }
     }
@@ -204,22 +206,10 @@ class ErrorBoundary extends React.Component {
 }
 
 function App() {
-  const [items, setItems] = useState([]);
+  const items = mockedItems;
   const [cartItems, setCartItems] = useState({});
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const newItems = await fetchItems();
-
-        setItems(newItems);
-      } catch (err) {
-        console.error(err);
-      }
-    };
-    fetchData();
-  }, []);
-
+  const handleClearCart = () => setCartItems({});
   const handleCartItemChange = (itemId, quantity) => {
     const cartItemQuantity = cartItems[itemId] || 0;
     const newQuantity = Number(cartItemQuantity + Number(quantity));
@@ -235,10 +225,6 @@ function App() {
 
     setCartItems(newCartItems);
   }
-
-  const handleClearCart = () => setCartItems({})
-
-  if (!items.length) return <div>Loading...</div>;
 
   return (
     <ErrorBoundary>
@@ -256,7 +242,7 @@ function App() {
               justifyContent: 'space-between',
             }}>
               <Link to="/">Pocket eCommerce</Link>
-              <FastCart />
+              <Cart />
             </header>
             <Switch>
               <Route
