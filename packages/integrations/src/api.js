@@ -5,3 +5,5 @@ export const fetchItems = async () => {
 
   return items;
 }
+
+export const checkOut = () => new Promise(resolve => setTimeout(() => resolve(), 1000));

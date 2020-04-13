@@ -7,7 +7,7 @@ import {
 } from 'react-router-dom';
 import './App.css';
 
-import { fetchItems } from './api';
+import { fetchItems, checkOut } from './api';
 
 const EcommerceContext = React.createContext({
   items: [],
@@ -99,7 +99,9 @@ const Details = ({ onAddToCart, match } ) => {
   );
 };
 
-function Checkout({ onCartItemChange }) {
+function Checkout({ onCartItemChange, onClearCart, history }) {
+  const [loading, setLoading] = useState(false);
+
   const {
     items = [],
     cart: {
@@ -107,22 +109,51 @@ function Checkout({ onCartItemChange }) {
     }
   } = useContext(EcommerceContext);
 
+  const handleCheckOut = () => {
+    const checkOutOrder = async () => {
+      setLoading(true);
+
+      try {
+        await checkOut();
+        onClearCart();
+        history.push('/');
+        alert('Order created successfully!')
+      } catch (error) {
+        console.error(error);
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    checkOutOrder();
+  }
+
+  if (loading) return <div>Checking Out... </div>;
+
   const cartItemsIds = Object.keys(cartItemsMap);
 
-  if (!cartItemsIds.length) return <div role="alert">Empty cart</div>;
+  if (!cartItemsIds.length) return <div role="alert" style={{ padding: '1rem' }}>Empty cart</div>;
 
-  const cartItems = items.filter(({ id }) => cartItemsIds.includes(String(id)));
+  const cartItems = items
+    .filter(({ id }) => cartItemsIds.includes(String(id))).map((item) => {
+      const { id, price } = item;
+      const quantity = cartItemsMap[id];
 
-  console.log({ cartItems, cartItemsIds });
+      return {
+        ...item,
+        quantity,
+        total: Number(price * quantity).toFixed(2)
+      }
+    });
+
+  const totalAmount = cartItems.map(({ total }) => total).reduce((agg, val) => agg + Number(val), 0).toFixed(2);
+  const totalQuantity = Object.values(cartItemsMap).reduce((agg, val) => agg + val, 0);
 
   return (
-    <div>
-      {
-        cartItems.map(({ id, name, price}) => {
-          const quantity = cartItemsMap[id];
-          const total = Math.round(price * quantity);
-
-          return (
+    <div style={{ padding: '1rem' }}>
+      <div>
+        {
+          cartItems.map(({ id, name, price, quantity, total }) => (
             <div
               key={id}
               style={{
@@ -137,9 +168,14 @@ function Checkout({ onCartItemChange }) {
               <span>Quantity: {quantity}</span>
               <button type="button" onClick={() => onCartItemChange(id, -quantity)}>Remove</button>
             </div>
-          );
-        })
-      }
+          ))
+        }
+      </div>
+      <div>
+        <p>Total: {totalAmount}</p>
+        <p>Total items quantity: {totalQuantity}</p>
+        <button onClick={handleCheckOut} type="submit">Check Out</button>
+      </div>
     </div>
   )
 }
@@ -177,6 +213,8 @@ function App() {
     setCartItems(newCartItems);
   }
 
+  const handleClearCart = () => setCartItems({})
+
   if (!items.length) return <div>Loading...</div>;
 
   return (
@@ -199,11 +237,13 @@ function App() {
           <Switch>
             <Route
               path="/item/:itemId"
-              component={(routeProps) => <Details onAddToCart={handleCartItemChange}{...routeProps}/>}
+              component={(routeProps) => <Details onAddToCart={handleCartItemChange} {...routeProps}/>}
             />
             <Route
               path="/checkout"
-              component={(routeProps) => <Checkout onCartItemChange={handleCartItemChange}{...routeProps}/>}
+              component={(routeProps) => (
+                <Checkout onCartItemChange={handleCartItemChange} onClearCart={handleClearCart} {...routeProps}/>
+              )}
             />
             <Route path="/" component={Home} />
           </Switch>
