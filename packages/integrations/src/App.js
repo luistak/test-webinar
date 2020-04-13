@@ -77,7 +77,7 @@ const Details = ({ onAddToCart, match } ) => {
     }}>
       <h1>Item: {name}</h1>
       <p>Price: {price}</p>
-      <a href={about} target="_blank">Learn more</a>
+      <a href={about} target="_blank" rel="noopener noreferrer">Learn more</a>
       <img
         src={image}
         style={{
@@ -85,7 +85,7 @@ const Details = ({ onAddToCart, match } ) => {
           maxWidth: '200px',
           height: 'auto',
         }}
-        alt={`Item ${name} picture`}
+        alt={`Item ${name} illustration`}
       />
       <form onSubmit={(e) => {
         e.preventDefault();
@@ -180,6 +180,29 @@ function Checkout({ onCartItemChange, onClearCart, history }) {
   )
 }
 
+class ErrorBoundary extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { hasError: false };
+  }
+
+  static getDerivedStateFromError(error) {
+    return { hasError: true };
+  }
+
+  componentDidCatch(error, errorInfo) {
+    console.error(error, errorInfo);
+  }
+
+  render() {
+    if (this.state.hasError) {
+      return <h1>Oops Something went wrong</h1>;
+    }
+
+    return this.props.children; 
+  }
+}
+
 function App() {
   const [items, setItems] = useState([]);
   const [cartItems, setCartItems] = useState({});
@@ -218,38 +241,40 @@ function App() {
   if (!items.length) return <div>Loading...</div>;
 
   return (
-    <div className="app">
-      <EcommerceContext.Provider value={{
-        items,
-        cart: {
-          items: cartItems
-        }
-      }}>
-        <Router>
-          <header style={{
-            display: 'flex',
-            padding: '1rem',
-            justifyContent: 'space-between',
-          }}>
-            <Link to="/">Pocket eCommerce</Link>
-            <FastCart />
-          </header>
-          <Switch>
-            <Route
-              path="/item/:itemId"
-              component={(routeProps) => <Details onAddToCart={handleCartItemChange} {...routeProps}/>}
-            />
-            <Route
-              path="/checkout"
-              component={(routeProps) => (
-                <Checkout onCartItemChange={handleCartItemChange} onClearCart={handleClearCart} {...routeProps}/>
-              )}
-            />
-            <Route path="/" component={Home} />
-          </Switch>
-        </Router>
-      </EcommerceContext.Provider>
-    </div>
+    <ErrorBoundary>
+      <div className="app">
+        <EcommerceContext.Provider value={{
+          items,
+          cart: {
+            items: cartItems
+          }
+        }}>
+          <Router>
+            <header style={{
+              display: 'flex',
+              padding: '1rem',
+              justifyContent: 'space-between',
+            }}>
+              <Link to="/">Pocket eCommerce</Link>
+              <FastCart />
+            </header>
+            <Switch>
+              <Route
+                path="/item/:itemId"
+                component={(routeProps) => <Details onAddToCart={handleCartItemChange} {...routeProps}/>}
+              />
+              <Route
+                path="/checkout"
+                component={(routeProps) => (
+                  <Checkout onCartItemChange={handleCartItemChange} onClearCart={handleClearCart} {...routeProps}/>
+                )}
+              />
+              <Route path="/" component={Home} />
+            </Switch>
+          </Router>
+        </EcommerceContext.Provider>
+      </div>
+    </ErrorBoundary>
   );
 }
 
