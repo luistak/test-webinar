@@ -34,7 +34,7 @@ function Home() {
   const { items } = useContext(EcommerceContext);
 
   return (
-    <div className="home">
+    <div>
       <h1 style={{ marginLeft: '1rem' }}>Items</h1>
       {
         items.map(({ id, name }) => (
@@ -44,7 +44,7 @@ function Home() {
               border: '1px solid', padding: '1rem', margin: '1rem 0'
             }}
           >
-            <Link to={`/item/${id}`}>
+            <Link to={`/item/${id}`} data-testid="item">
               {name}
             </Link>
           </div>
@@ -71,7 +71,7 @@ const Details = ({ onAddToCart, match } ) => {
   const handleQuantityChange = ({ target: { value }}) => setQuantity(value);
 
   return (
-    <div style={{
+    <div data-testid="item-details" style={{
       display: 'flex',
       padding: '1rem',
       flexDirection: 'column'
