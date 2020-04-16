@@ -1,6 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchAuthenticate } from './reducer';
+import './LoginPage.css';
 
 export default function LoginPage() {
   const [username, setUsername] = React.useState('');
@@ -10,11 +11,17 @@ export default function LoginPage() {
   const user = useSelector((user) => user);
 
   if (user.isLoading) {
-    return <div>Carregando...</div>;
+    return (
+      <div className="login-page">Carregando...</div>
+    );
   }
 
   if (user.isAuth) {
-    return <div>Olá, {user.name}</div>;
+    return (
+      <div className="login-page">
+        Olá, {user.name}
+      </div>
+    );
   }
 
   function handleSubmit(e) {
@@ -25,10 +32,13 @@ export default function LoginPage() {
 
   return (
     <div className="login-page">
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>
-            <span>Nome de Usuário:</span>
+      <form
+        onSubmit={handleSubmit}
+        className="login-form"
+      >
+        <label>
+          <div className="login-form__field">
+            <span>Nome de Usuário</span>
             <input
               type="text"
               value={username}
@@ -36,11 +46,11 @@ export default function LoginPage() {
                 setUsername(e.target.value)
               }
             />
-          </label>
-        </div>
-        <div>
-          <label>
-            <span>Senha:</span>
+          </div>
+        </label>
+        <label>
+          <div className="login-form__field">
+            <span>Senha</span>
             <input
               type="password"
               value={password}
@@ -48,8 +58,8 @@ export default function LoginPage() {
                 setPassword(e.target.value)
               }
             />
-          </label>
-        </div>
+          </div>
+        </label>
         <div>
           <button type="submit">Entrar</button>
         </div>
