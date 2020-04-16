@@ -1,32 +1,22 @@
-import { authenticate } from '../services/AuthService';
+import { authenticate } from "./service";
 
 const initialState = {
   isAuth: false,
   name: undefined,
   isLoading: false,
-  error: undefined
+  error: undefined,
 };
 
-const FETCH_AUTH = 'FETCH_AUTH';
-const FETCH_AUTH_FULFILL = 'FETCH_AUTH_FULFILL';
-const FETCH_AUTH_REJECT = 'FETCH_AUTH_REJECT';
-
-const fetchAuth = () => ({ type: FETCH_AUTH });
-const fetchAuthFulfill = (name) => ({
-  type: FETCH_AUTH_FULFILL,
-  payload: { name }
-});
-const fetchAuthReject = (error) => ({
-  type: FETCH_AUTH_REJECT,
-  payload: { error }
-});
+const FETCH_AUTH = "FETCH_AUTH";
+const FETCH_AUTH_FULFILL = "FETCH_AUTH_FULFILL";
+const FETCH_AUTH_REJECT = "FETCH_AUTH_REJECT";
 
 export default function userReducer(state = initialState, action) {
   switch (action.type) {
     case FETCH_AUTH: {
       return {
         ...state,
-        isLoading: true
+        isLoading: true,
       };
     }
     case FETCH_AUTH_FULFILL: {
@@ -34,7 +24,7 @@ export default function userReducer(state = initialState, action) {
         ...state,
         isLoading: false,
         name: action.payload.name,
-        isAuth: true
+        isAuth: true,
       };
     }
     case FETCH_AUTH_REJECT: {
@@ -42,7 +32,7 @@ export default function userReducer(state = initialState, action) {
         ...state,
         isLoading: false,
         isAuth: false,
-        error: action.payload.error
+        error: action.payload.error,
       };
     }
     default: {
@@ -51,14 +41,23 @@ export default function userReducer(state = initialState, action) {
   }
 }
 
+const fetchAuth = () => ({ type: FETCH_AUTH });
+const fetchAuthFulfill = (name) => ({
+  type: FETCH_AUTH_FULFILL,
+  payload: { name },
+});
+const fetchAuthReject = (error) => ({
+  type: FETCH_AUTH_REJECT,
+  payload: { error },
+});
+
 export async function fetchAuthenticate(dispatch, user, password) {
   dispatch(fetchAuth());
-
   try {
     const resp = await authenticate(user, password);
     dispatch(fetchAuthFulfill(resp.name));
   } catch (e) {
     console.error(e);
-    dispatch(fetchAuthReject('Login/Senha inválidos'));
+    dispatch(fetchAuthReject("Login/Senha inválidos"));
   }
 }
