@@ -3,7 +3,7 @@ import { render } from '@testing-library/react';
 import user from '@testing-library/user-event';
 import LoginPage from './LoginPage';
 
-test('logging in', async () => {
+test('logging in', () => {
   const screen = render(<LoginPage />);
 
   const userInput = screen.getByLabelText(/nome/i);
@@ -16,5 +16,5 @@ test('logging in', async () => {
   user.type(passwordInput, '123123');
   user.click(submitButton);
 
-  await screen.findByText(/olá/i);
+  screen.getByText(/olá/i);
 });
