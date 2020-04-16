@@ -1,9 +1,9 @@
-import React from "react";
-import LoginPage from "./LoginPage";
-import { createStore } from "redux";
-import { Provider } from "react-redux";
-import userReducer from "./reducer";
-import "./App.css";
+import React from 'react';
+import LoginPage from './LoginPage';
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
+import userReducer from './reducer';
+import './App.css';
 
 function App() {
   return (

@@ -1,10 +1,10 @@
-import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { fetchAuthenticate } from "./reducer";
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchAuthenticate } from './reducer';
 
 export default function LoginPage() {
-  const [username, setUsername] = React.useState("");
-  const [password, setPassword] = React.useState("");
+  const [username, setUsername] = React.useState('');
+  const [password, setPassword] = React.useState('');
 
   const dispatch = useDispatch();
   const user = useSelector((user) => user);
@@ -19,11 +19,12 @@ export default function LoginPage() {
 
   function handleSubmit(e) {
     e.preventDefault();
+
     fetchAuthenticate(dispatch, username, password);
   }
 
   return (
-    <div>
+    <div className="login-page">
       <form onSubmit={handleSubmit}>
         <div>
           <label>
@@ -31,7 +32,9 @@ export default function LoginPage() {
             <input
               type="text"
               value={username}
-              onChange={(e) => setUsername(e.target.value)}
+              onChange={(e) =>
+                setUsername(e.target.value)
+              }
             />
           </label>
         </div>
@@ -41,7 +44,9 @@ export default function LoginPage() {
             <input
               type="password"
               value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              onChange={(e) =>
+                setPassword(e.target.value)
+              }
             />
           </label>
         </div>
@@ -49,7 +54,9 @@ export default function LoginPage() {
           <button type="submit">Entrar</button>
         </div>
       </form>
-      {user.error && <span role="alert">{user.error}</span>}
+      {user.error && (
+        <span role="alert">{user.error}</span>
+      )}
     </div>
   );
 }
