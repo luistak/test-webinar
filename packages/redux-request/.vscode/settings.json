@@ -4,5 +4,6 @@
   "prettier.trailingComma": "none",
   "prettier.printWidth": 55,
   "editor.fontFamily": "'Fira Code', 'Cascadia Code', 'Droid Sans Mono', monospace",
-  "editor.minimap.enabled": false
+  "editor.minimap.enabled": false,
+  "editor.fontSize": 16
 }
