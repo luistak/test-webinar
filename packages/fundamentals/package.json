@@ -4,10 +4,13 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "test": "node ./src/tests/1-simple.js",
-    "test:global": "node -r ./src/globals.js"
+    "test:1": "node src/tests/1-simple.js",
+    "test:2": "node src/tests/2-assertion.js",
+    "test:3": "node src/tests/3-utilities.js",
+    "test:4": "jest src/tests/4-jest.test.js",
+    "test": "jest"
   },
   "devDependencies": {
-    "jest": "^25.2.7"
+    "jest": "^25.3.0"
   }
 }
