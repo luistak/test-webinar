@@ -4,20 +4,17 @@ import { render } from '@testing-library/react';
 import LogoImage from  '../logo.svg';
 import App from '..';
 
-test('renders learn react link with logo', () => {
-  const {
-    getByText,
-    getByAltText,
-    // container,
-    // debug
-  } = render(<App />);
 
-  // console.log(container.innerHTML)
-  // debug()
+test('renders react logo', () => {
+  const { getByAltText } = render(<App />);
 
   const image = getByAltText('logo');
   expect(image).toHaveAttribute('src', LogoImage);
+});
 
-  const link = getByText(/learn React/i);
+test('renders learn react link', () => {
+  const { getByText } = render(<App />);
+
+  const link = getByText('Learn React');
   expect(link).toHaveAttribute('href');
 });

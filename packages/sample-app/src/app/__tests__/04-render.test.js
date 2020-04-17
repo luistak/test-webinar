@@ -18,11 +18,15 @@ const render = (Ui) => {
   }
 }
 
-test('renders learn react link with logo', () => {
-  const { getByAltText, getByText } = render(<App />);
+test('renders react logo', () => {
+  const { getByAltText } = render(<App />);
 
   const image = getByAltText('logo');
   expect(image).toHaveAttribute('src', LogoImage);
+});
+
+test('renders learn react link', () => {
+  const { getByText } = render(<App />);
 
   const link = getByText('Learn React');
   expect(link).toHaveAttribute('href');

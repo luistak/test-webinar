@@ -8,12 +8,12 @@ test('renders learn react link with logo', () => {
   ReactDOM.render(<App />, div);
 
   const image = div.querySelector('img');
-  expect(image).not.toBeNull();
+  expect(image).toBeTruthy();
   expect(image).toHaveAttribute('src');
   expect(image).toHaveAttribute('alt', 'logo')
 
   const link = div.querySelector('a');
-  expect(link).not.toBeNull();
+  expect(link).toBeTruthy();
   expect(link).toHaveAttribute('href');
   expect(link).toHaveTextContent('Learn React');
 });
