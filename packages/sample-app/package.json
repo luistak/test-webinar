@@ -1,5 +1,5 @@
 {
-  "name": "sample-app",
+  "name": "@test-webinar/sample-app",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

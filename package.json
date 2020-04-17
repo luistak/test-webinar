@@ -1,9 +1,9 @@
 {
-  "name": "test-workshop",
+  "name": "test-webinar",
   "version": "1.0.0",
-  "description": "Tests Workshop POC",
+  "description": "Tests webinar POC",
   "main": "index.js",
-  "repository": "git@github.com:luistak/test-workshop.git",
+  "repository": "git@github.com:luistak/test-webinar.git",
   "author": "Luis <takahashihideki408@gmail.com>",
   "license": "MIT",
   "private": true,

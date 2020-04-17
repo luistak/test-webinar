@@ -1,5 +1,5 @@
 {
-  "name": "integrations",
+  "name": "@test-webinar/integrations",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
