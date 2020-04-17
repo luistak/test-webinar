@@ -1,5 +1,8 @@
 import React from 'react';
 import logo from './logo.svg';
+
+import Quantity from './quantity';
+
 import './App.css';
 
 function App() {
@@ -18,6 +21,7 @@ function App() {
         >
           Learn React
         </a>
+        <Quantity />
       </header>
     </div>
   );

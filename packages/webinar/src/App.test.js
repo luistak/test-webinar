@@ -1,18 +1,20 @@
 import React from 'react';
-import { render } from '@testing-library/react';
 import App from './App';
+import logo from './logo.svg';
 
-test('renders react logo', () => {
+import { render } from '@testing-library/react';
+
+test('Renders react logo', () => {
   const queries = render(<App />);
 
   const image = queries.getByAltText('logo');
-  expect(image).toHaveAttribute('src');
+  expect(image).toHaveAttribute('src', logo);
 });
 
-test('renders learn react link', () => {
+test('Renders react docs link', () => {
   const queries = render(<App />);
 
   const link = queries.getByText('Learn React');
-  expect(link).toHaveAttribute('rel');
   expect(link).toHaveAttribute('href');
+  expect(link).toHaveAttribute('rel');
 });

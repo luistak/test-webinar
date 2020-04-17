@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 const ItemQuantity = ({ min = 0, max = 10, initialCount = 0, onChange, ...opts }) => {
-  const [quantity, setQuantity] = useState(0);
+  const [quantity, setQuantity] = useState(initialCount);
   const [touched, setTouched] = useState(false);
 
   const handleChange = ({ target: { value } }) => {
