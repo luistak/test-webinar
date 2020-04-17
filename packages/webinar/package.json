@@ -1,5 +1,5 @@
 {
-  "name": "webinar",
+  "name": "@test-webinar/chapter-frontend",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
