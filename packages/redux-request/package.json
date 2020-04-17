@@ -14,9 +14,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test src/LoginPage.test.jsx",
-    "test:complete": "react-scripts test src/LoginPage-complete.test.jsx"
+    "test": "react-scripts test src/redux.test.js"
   },
   "eslintConfig": {
     "extends": "react-app"
