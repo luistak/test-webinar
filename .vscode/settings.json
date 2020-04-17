@@ -1,5 +1,7 @@
 {
   "prettier.semi": true,
   "prettier.singleQuote": true,
-  "prettier.trailingComma": "none"
+  "prettier.trailingComma": "none",
+  "editor.fontSize": 15,
+  "terminal.integrated.fontSize": 14
 }
