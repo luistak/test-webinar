@@ -1,5 +1,5 @@
 {
-  "name": "redux-request",
+  "name": "@test-webinar/redux-request",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
