@@ -4,10 +4,6 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "test:simple": "node src/tests/1-simple.js",
-    "test:assertion": "node src/tests/2-assertion.js",
-    "test:utilities": "node src/tests/3-utilities.js",
-    "test:jest": "jest src/tests/4-jest.test.js",
     "test": "jest"
   },
   "devDependencies": {
