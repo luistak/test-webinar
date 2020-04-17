@@ -21,8 +21,6 @@ This Webinar it's inspired in the Testing Javascript course material:
 
 The files are intended to test the `math` module.
 
-> To run the files, run `node lessons/<lesson-filename>.js`.
-
 ## React
 
 - [`react-dom.test.js`](packages/sample-app/src/app/__tests__/01-react-dom.test.js) - Testing React apps with ReactDOM
