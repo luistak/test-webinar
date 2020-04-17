@@ -15,9 +15,20 @@ This Webinar it's inspired in the Testing Javascript course material:
 ## Fundamentals
 
 - [`simple.js`](packages/fundamentals/src/tests/1-simple.js) - Simple automated test
+
+> To run this tests enter the `packages/fundamentals` and run `yarn test:simple`
+
 - [`assertion.js`](packages/fundamentals/src/tests/2-assertion.js) - Added a custom assertion
-- [`utilities.js`](packages/fundamentals/src/tests/3-utilities.js) - Created test utilities 
+
+> To run this tests enter the `packages/fundamentals` and run `yarn test:assertion`
+
+- [`utilities.js`](packages/fundamentals/src/tests/3-utilities.js) - Created test utilities
+
+> To run this tests enter the `packages/fundamentals` and run `yarn test:utilities`
+
 - [`jest.js`](packages/fundamentals/src/tests/4-jest.test.js) - Simple jest usage
+
+> To run this tests enter the `packages/fundamentals` and run `yarn test:jest`
 
 The files are intended to test the `math` module.
 
@@ -36,7 +47,9 @@ The files are intended to test the `math` module.
 
 > To run those tests enter the `packages/sample-app` and run `yarn test`
 
-<!-- TODO: adhoc -->
+- [`redux.test.js`](packages/redux-request/src/redux.test.js) - Testing async redux flows
+
+> To run those tests enter the `packages/redux-request` and run `yarn test`
 
 - [`integration.test.js`](packages/integrations/src/__tests__/integration.test.js) - Pocket eCommerce integration test
 
