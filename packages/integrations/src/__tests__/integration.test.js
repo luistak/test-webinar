@@ -19,7 +19,8 @@ test('order check out ', async () => {
   mockedCheckOut.mockResolvedValueOnce({ success: true });
 
   const { getByText, findByText, findByLabelText, getAllByTestId } = render(<App />);
-  expect(getByText('Items')).toBeInTheDocument();
+
+  expect(getByText(/home/i)).toBeInTheDocument();
 
   const items = getAllByTestId('item');
   const firstItem = items[0];
@@ -42,5 +43,5 @@ test('order check out ', async () => {
     expect(window.alert).toHaveBeenCalled()
   })
 
-  await findByText('Items');
+  await findByText(/home/i);
 });

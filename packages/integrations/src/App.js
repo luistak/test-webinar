@@ -24,7 +24,7 @@ function Cart() {
 
   return (
     <div>
-      <div><Link to="/checkout">Cart</Link></div>
+      <div><Link to="/checkout" data-testid="cart" >Cart</Link></div>
       <div>Items Quantity: {quantity}</div>
     </div>
   )
@@ -35,7 +35,7 @@ function Home() {
 
   return (
     <div>
-      <h1 style={{ marginLeft: '1rem' }}>Items</h1>
+      <h1 style={{ marginLeft: '1rem' }}>Home</h1>
       {
         items.map(({ id, name }) => (
           <div
