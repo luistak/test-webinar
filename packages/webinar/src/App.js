@@ -1,5 +1,6 @@
 import React from 'react';
 import logo from './logo.svg';
+import Quantity from './quantity';
 
 import './App.css';
 
@@ -19,6 +20,7 @@ function App({ shouldShowImage = true }) {
         >
           Learn React
         </a>
+        <Quantity />
       </header>
     </div>
   );

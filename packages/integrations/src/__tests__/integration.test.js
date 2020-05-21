@@ -9,8 +9,8 @@ import {
 /**
  * Change between these two imports
  */
-import App from '../App';
-// import App from '../App-02';
+// import App from '../App';
+import App from '../App-02';
 
 jest.mock('../api')
 
