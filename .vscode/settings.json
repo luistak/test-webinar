@@ -3,5 +3,5 @@
   "prettier.singleQuote": true,
   "prettier.trailingComma": "none",
   "editor.fontSize": 15,
-  "terminal.integrated.fontSize": 14
+  // "terminal.integrated.fontSize": 14
 }
